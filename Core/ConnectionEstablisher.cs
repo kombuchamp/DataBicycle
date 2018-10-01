@@ -9,38 +9,22 @@ namespace DataBicycle.Core
     {
         SqlConnection connection;
 
-        
-        // Создаем ConnectionStringBuilder для создания строки подключения
-        //SqlConnectionStringBuilder strBuilder = new SqlConnectionStringBuilder();
-        
         public SqlConnection Start()
         {
-            // Создаем ConnectionStringBuilder для создания строки подключения
             SqlConnectionStringBuilder strBuilder = new SqlConnectionStringBuilder();
 
             string startupPath = Directory.GetCurrentDirectory();
 
-            // Для подключения к базе данных используется LocalDB (см. https://docs.microsoft.com/ru-ru/sql/database-engine/configure-windows/sql-server-2016-express-localdb)
-            // Приложение может не запускаться из-за того, что не установлен какой-то компонент SQL Server Express
+            // LocalDB is used to connect to database(https://docs.microsoft.com/ru-ru/sql/database-engine/configure-windows/sql-server-2016-express-localdb)
+            // SQL Server Express service is required to run this app
             strBuilder.DataSource = @"(LocalDB)\MSSQLLocalDB"; 
             strBuilder.AttachDBFilename = startupPath +  @"\BicycleDB.mdf";
             strBuilder.IntegratedSecurity = true;
             strBuilder.ConnectTimeout = 30;
 
-
             connection = new SqlConnection();
             connection.ConnectionString = strBuilder.ConnectionString;
-
-
-            /* Метод выполняет две функции - устанавливает соединение
-             * и возвращает экземпляр SqlConnection, что нарушает
-             * правило одной операции. Экземпляр SqlConnection 
-             * инициализируется как поле, поэтому приходится размещать
-             * блок обработки исключений внутри класса (это-костыль)
-             * 
-             * TODO: рефакторинг
-             */
-
+            
             try
             {
                 if (!File.Exists(startupPath + @"\BicycleDB.mdf"))
@@ -60,12 +44,9 @@ namespace DataBicycle.Core
             return connection;
         }
 
-
         public void Finish()
         {
             connection.Close();
-            
         }
-
     }
 }
