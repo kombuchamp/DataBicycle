@@ -10,43 +10,31 @@ namespace DataBicycle.Core
 {
     public static class PlaceholderManager
     {
-        // Расширающий метод для текстбокса
         public static void AddPlaceholder(this TextBox tb, string placeholderText )
         {
-            // Заполняет текстовое поле плейсхолдером
+            // Fill text field with placeholder
             tb.ForeColor = Color.Gray;
             tb.Text = placeholderText;
 
-            // Лямбда-выражения для управления событиями
-
-            // Событие входа текстового поля в фокус
-            tb.Enter += (s, e) => // Приписываем событию метод с делегатом EventHandler(object s, EventArgs e)
+            // Textbox is in the focus
+            tb.Enter += (s, e) =>
             {
-                if (tb.Text == placeholderText)
-                {
-                    tb.ForeColor = Color.Black;
-                    tb.Text = "";
-                }
+                if (tb.Text != placeholderText)
+                    return;
+                tb.ForeColor = Color.Black;
+                tb.Text = "";
 
             };
 
-            // Событие выхода из фокуса
+            // Textbox is out of focus
             tb.Leave += (s, e) =>
             {
-                if(tb.Text == "")
-                {
-                    tb.ForeColor = Color.Gray;
-                    tb.Text = placeholderText;
-                }
-
-
+                if (tb.Text != "")
+                    return;
+                tb.ForeColor = Color.Gray;
+                tb.Text = placeholderText;
             };
 
-        }
-
-        private static void Tb_Enter(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 }
