@@ -18,7 +18,7 @@ namespace DataBicycle
             InitializeComponent();
         }
 
-        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private async void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int selectedIndex = listBox1.SelectedIndex;
 
@@ -65,7 +65,7 @@ namespace DataBicycle
             cmdGetManyToManyCommand.Parameters.AddWithValue("ID", currID);
 
             // Get data from database with SqlDataReader and fill the form
-            SqlDataReader reader = cmdGetOneToManyCommand.ExecuteReader();
+            SqlDataReader reader = await cmdGetOneToManyCommand.ExecuteReaderAsync();
 
             using (reader)
             {
@@ -80,7 +80,8 @@ namespace DataBicycle
                 }
             }
 
-            reader = cmdGetManyToManyCommand.ExecuteReader();
+            reader = await cmdGetManyToManyCommand.ExecuteReaderAsync();
+
             using (reader)
             {
                 string listOfEffects = "";
