@@ -1,14 +1,9 @@
 # DataBicycle
 
 
-Database client application. Created on C# language using ADO.NET technology. Albeit graphical interface and comments in code are written in Russian, application structure is quite plain and self-explainatory, so anyone is free to use it. Any comments and advices are appreciated (since it is one of the first projects of mine)
+Database client application. Created as a part of homework project on "Basics of databases an knowlege bases design" subject in Bauman Moscow State Tecnical University (BMSTU), SM4 "High precision airborne devices" subdepartment.
+This application is a prototype of a non-lethal weapons information system. It comes with database that has one-to-many and many-to-many relationships and has some mock values (representing such devices). Application allows to navigate through database, to perform a search and represents its contents in a fancy form.
 
-============
+Microsoft SQL Server service is required to run this app properly!
+After building an app, copy database file (BicycleDB.mdf) to your bin/debug or bin/release folder (where your executable resides)
 
-Клиент-приложение для базы данных, написанное с целью освоения языка C# и технологии ADO.NET. Выполнено в виде информационно-поисковой системы по образцам оружия нелетального действия (МГТУ им. Н. Э. Баумана, кафедра СМ4 "Высокоточные летательные аппараты")
-
-# Описание
-
-Приложение написано на языке С#. Подключение к базе данных MSSQL происходит локально (файл базы данных .mdf должен находиться в рабочей директории программы). Для локального подключения к базе данных могут потреботваться некоторые компоненты SQL Server Express, без которых приложение может не запуститься (подробнее см. https://docs.microsoft.com/ru-ru/sql/database-engine/configure-windows/sql-server-016-express-localdb).
-
-Для извлечения данных из БД используются инструменты ADO.NET. В базе данных в качестве примера созданы три таблицы, между ними реализованы связи один-ко-многим и многие-ко-многим.
