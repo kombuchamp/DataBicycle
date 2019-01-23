@@ -11,62 +11,59 @@ using System.Windows.Forms;
 
 namespace DataBicycle
 {
-    public partial class Form2 : Form
+    public partial class DetailsForm : Form
     {
-
-
-
-        // Свойства для доступа к элементам формы извне
-        public string PropTextBox1
+        // Properties for external access
+        public string TextName
         {
             get
             {
-                return textBox1.Text;
+                return textName.Text;
             }
             set
             {
-                textBox1.Text = value;
+                textName.Text = value;
             }
         }
 
-        public string PropTextBox2
+        public string TextCountry
         {
             get
             {
-                return textBox2.Text;
+                return textCountry.Text;
             }
             set
             {
-                textBox2.Text = value;
+                textCountry.Text = value;
             }
         }
 
-        public string PropTextBox3
+        public string TextEffects
         {
             get
             {
-                return textBox3.Text;
+                return textEffects.Text;
             }
             set
             {
-                textBox3.Text = value;
+                textEffects.Text = value;
             }
         }
 
-        public Image PropPictureBox1Image
+        public Image PictureBox
         {
             get
             {
-                return pictureBox1.Image;
+                return pictureBox.Image;
             }
             set
             {
                 string currentFolder = Directory.GetCurrentDirectory();
-                pictureBox1.Image = value ?? Image.FromFile(currentFolder + "\\about.jpg");
+                pictureBox.Image = value ?? Image.FromFile(currentFolder + "\\about.jpg");
             }
         }
 
-        public string PropTitle
+        public string Title
         {
             set
             {
@@ -74,10 +71,9 @@ namespace DataBicycle
             }
         }
 
-        public Form2()
+        public DetailsForm()
         {
             InitializeComponent();
-
         }
 
 
