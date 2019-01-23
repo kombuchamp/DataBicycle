@@ -22,17 +22,12 @@ namespace DataBicycle
             this.textBoxDescription.Text = AssemblyDescription;
         }
 
-        // Реализация паттерна проектирования "singleton"
         private static AboutWindow instance = null;
 
-
-        // Фабричный метод
         public static AboutWindow ReturnInstance()
         {
-            // Если объект еще не создан, создаем
             if (instance == null)
                 instance = new AboutWindow();
-            // Если создан - не создаем
 
             return instance;
         }

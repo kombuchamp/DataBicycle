@@ -129,7 +129,6 @@ namespace DataBicycle
             if (query == null || query.Length <= 0)
                 return;
 
-            // Проверяем, установлено ли соединение
             if (!TryToConnect(connection))
                 return;
 
