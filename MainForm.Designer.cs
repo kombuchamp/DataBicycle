@@ -1,6 +1,6 @@
 ﻿namespace DataBicycle
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.listSearchResults = new System.Windows.Forms.ListBox();
             this.textSearchPrompt = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonShowAll = new System.Windows.Forms.Button();
@@ -40,15 +40,15 @@
             // 
             // listBox1
             // 
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(0, 112);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(791, 306);
-            this.listBox1.TabIndex = 2;
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            this.listSearchResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listSearchResults.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listSearchResults.FormattingEnabled = true;
+            this.listSearchResults.ItemHeight = 16;
+            this.listSearchResults.Location = new System.Drawing.Point(0, 112);
+            this.listSearchResults.Name = "listBox1";
+            this.listSearchResults.Size = new System.Drawing.Size(791, 306);
+            this.listSearchResults.TabIndex = 2;
+            this.listSearchResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listSearchResults_MouseDoubleClick);
             // 
             // textSearchPrompt
             // 
@@ -61,7 +61,7 @@
             // 
             this.buttonSearch.Location = new System.Drawing.Point(646, 43);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(133, 23);
+            this.buttonSearch.Size = new System.Drawing.Size(133, 30);
             this.buttonSearch.TabIndex = 0;
             this.buttonSearch.Text = "Поиск";
             this.buttonSearch.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             this.HelpToolStripMenuItem.Text = "О программе";
             this.HelpToolStripMenuItem.Click += new System.EventHandler(this.HelpToolStripMenuItem_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AcceptButton = this.buttonSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -105,14 +105,14 @@
             this.Controls.Add(this.buttonShowAll);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.textSearchPrompt);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listSearchResults);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "DataBicycle";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -125,7 +125,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listSearchResults;
         private System.Windows.Forms.TextBox textSearchPrompt;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonShowAll;

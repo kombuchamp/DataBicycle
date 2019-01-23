@@ -1,39 +1,44 @@
 ﻿using System;
 using System.Windows.Forms;
-
 using DataBicycle.Core;
 using System.Data.SqlClient;
 
 
 namespace DataBicycle
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         static ConnectionEstablisher Establisher = new ConnectionEstablisher();
+        SqlConnection connection;
 
-        SqlConnection connection = Establisher.Start();
-
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+            try
+            {
+                connection = Establisher.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK);
+            }
         }
 
-        private async void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private async void listSearchResults_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int selectedIndex = listBox1.SelectedIndex;
+            int selectedIndex = listSearchResults.SelectedIndex;
 
-            bool listIsEmpty = listBox1.Items.Count < 0;
+            bool listIsEmpty = listSearchResults.Items.Count < 0;
             bool listIndexIsNegative = selectedIndex < 0;
 
-            if (listIsEmpty || listIndexIsNegative)
-                return;
+            if (listIsEmpty || listIndexIsNegative) return;
 
-            Form2 f2 = new Form2();
+            DetailsForm f2 = new DetailsForm();
             f2.Show();
 
             int currID = DataObtainer.IndexToID(selectedIndex);
 
-            if (!IsConnected(connection))
+            if (!TryToConnect(connection))
             {
                 f2.Close();
                 return;
@@ -71,12 +76,12 @@ namespace DataBicycle
             {
                 while (reader.Read())
                 {
-                    f2.PropTextBox1 = reader[0].ToString();
-                    f2.PropTitle = reader[0].ToString();
+                    f2.TextName = reader[0].ToString();
+                    f2.Title = reader[0].ToString();
 
-                    f2.PropTextBox2 = reader[1].ToString();
-                    byte[] image = (byte[])reader[2];
-                    f2.PropPictureBox1Image = ImageReader.GetImage(image);
+                    f2.TextCountry = reader[1].ToString();
+                    byte[] image = reader[2] as byte[];
+                    f2.PictureBox = ImageReader.GetImage(image);
                 }
             }
 
@@ -95,7 +100,7 @@ namespace DataBicycle
                     else
                         listOfEffects += currentEntry;
                 }
-                f2.PropTextBox3 = listOfEffects;
+                f2.TextEffects = listOfEffects;
             }
         }
 
@@ -117,7 +122,7 @@ namespace DataBicycle
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            listSearchResults.Items.Clear();
 
             string query = textSearchPrompt.Text;
 
@@ -125,27 +130,26 @@ namespace DataBicycle
                 return;
 
             // Проверяем, установлено ли соединение
-            if (!IsConnected(connection))
+            if (!TryToConnect(connection))
                 return;
 
             DataObtainer obtainer = new DataObtainer(connection);
-            obtainer.SearchAndFillList(query, listBox1);
+            obtainer.SearchAndFillList(query, listSearchResults);
         }
 
 
         private void buttonShowAll_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            listSearchResults.Items.Clear();
 
-            if (!IsConnected(connection))
-                return;
+            if (!TryToConnect(connection)) return;
 
             DataObtainer obtainer = new DataObtainer(connection);
-            obtainer.FillList(listBox1);
+            obtainer.FillList(listSearchResults);
         }
 
 
-        private bool IsConnected(SqlConnection connection)
+        private bool TryToConnect(SqlConnection connection)
         {
             if (connection == null)
             {
