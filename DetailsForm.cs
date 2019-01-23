@@ -16,50 +16,29 @@ namespace DataBicycle
         // Properties for external access
         public string TextName
         {
-            get
-            {
-                return textName.Text;
-            }
-            set
-            {
-                textName.Text = value;
-            }
+            get => textName.Text;
+            set => textName.Text = value;
         }
 
         public string TextCountry
         {
-            get
-            {
-                return textCountry.Text;
-            }
-            set
-            {
-                textCountry.Text = value;
-            }
+            get => textCountry.Text;
+            set => textCountry.Text = value;
         }
 
         public string TextEffects
         {
-            get
-            {
-                return textEffects.Text;
-            }
-            set
-            {
-                textEffects.Text = value;
-            }
+            get => textEffects.Text;
+            set => textEffects.Text = value;
         }
 
         public Image PictureBox
         {
-            get
-            {
-                return pictureBox.Image;
-            }
+            get => pictureBox.Image;
             set
             {
-                string currentFolder = Directory.GetCurrentDirectory();
-                pictureBox.Image = value ?? Image.FromFile(currentFolder + "\\about.jpg");
+                var currentFolder = Directory.GetCurrentDirectory();
+                pictureBox.Image = value ?? Properties.Resources.about;
             }
         }
 
