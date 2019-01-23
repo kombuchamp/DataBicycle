@@ -75,7 +75,7 @@ namespace DataBicycle
                     f2.PropTitle = reader[0].ToString();
 
                     f2.PropTextBox2 = reader[1].ToString();
-                    byte[] image = (byte[])reader[2];
+                    byte[] image = reader[2] as byte[];
                     f2.PropPictureBox1Image = ImageReader.GetImage(image);
                 }
             }

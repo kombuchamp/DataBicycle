@@ -40,7 +40,7 @@ namespace DataBicycle
                 textBox2.Text = value;
             }
         }
-        
+
         public string PropTextBox3
         {
             get
@@ -62,10 +62,7 @@ namespace DataBicycle
             set
             {
                 string currentFolder = Directory.GetCurrentDirectory();
-                if (value == null)
-                    pictureBox1.Image = Image.FromFile(currentFolder + "\\defaultImage.jpg");
-
-                pictureBox1.Image = value;
+                pictureBox1.Image = value ?? Image.FromFile(currentFolder + "\\about.jpg");
             }
         }
 
@@ -80,7 +77,7 @@ namespace DataBicycle
         public Form2()
         {
             InitializeComponent();
-            
+
         }
 
 

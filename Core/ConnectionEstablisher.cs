@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace DataBicycle.Core
 {
@@ -11,20 +12,18 @@ namespace DataBicycle.Core
 
         public SqlConnection Start()
         {
-            SqlConnectionStringBuilder strBuilder = new SqlConnectionStringBuilder();
-
+            
             string startupPath = Directory.GetCurrentDirectory();
 
             // LocalDB is used to connect to database(https://docs.microsoft.com/ru-ru/sql/database-engine/configure-windows/sql-server-2016-express-localdb)
             // SQL Server Express service is required to run this app
-            strBuilder.DataSource = @"(LocalDB)\MSSQLLocalDB"; 
-            strBuilder.AttachDBFilename = startupPath +  @"\BicycleDB.mdf";
-            strBuilder.IntegratedSecurity = true;
-            strBuilder.ConnectTimeout = 30;
+            
+
 
             connection = new SqlConnection();
-            connection.ConnectionString = strBuilder.ConnectionString;
-            
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+
+
             try
             {
                 if (!File.Exists(startupPath + @"\BicycleDB.mdf"))
