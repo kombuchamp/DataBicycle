@@ -12,34 +12,23 @@ namespace DataBicycle.Core
 
         public SqlConnection Start()
         {
-            
             string startupPath = Directory.GetCurrentDirectory();
 
             // LocalDB is used to connect to database(https://docs.microsoft.com/ru-ru/sql/database-engine/configure-windows/sql-server-2016-express-localdb)
-            // SQL Server Express service is required to run this app
-            
-
+            // SQL Server Express service is required to run this app.
+            // Attach target database to your local SQLExpress server and provide connection string in the App.config
 
             connection = new SqlConnection();
-            connection.ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            connection.ConnectionString = ConfigurationManager
+                .ConnectionStrings["connectionString"]
+                .ConnectionString;
 
-
-            try
+            if (!File.Exists(startupPath + @"\BicycleDB.mdf"))
             {
-                if (!File.Exists(startupPath + @"\BicycleDB.mdf"))
-                {
-                    throw new Exception("Файл базы данных не обнаружен в каталоге приложения");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK);
-                return null;
+                throw new Exception("Файл базы данных не обнаружен в каталоге приложения");
             }
 
             connection.Open();
-            
             return connection;
         }
 

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DataBicycle
 {
     public partial class DetailsForm : Form
     {
+        public DetailsForm()
+        {
+            InitializeComponent();
+        }
+
         // Properties for external access
         public string TextName
         {
@@ -49,12 +47,5 @@ namespace DataBicycle
                 Text = value;
             }
         }
-
-        public DetailsForm()
-        {
-            InitializeComponent();
-        }
-
-
     }
 }

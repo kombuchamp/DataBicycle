@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-
 using DataBicycle.Core;
 using System.Data.SqlClient;
 
@@ -10,12 +9,19 @@ namespace DataBicycle
     public partial class MainForm : Form
     {
         static ConnectionEstablisher Establisher = new ConnectionEstablisher();
-
-        SqlConnection connection = Establisher.Start();
+        SqlConnection connection;
 
         public MainForm()
         {
             InitializeComponent();
+            try
+            {
+                connection = Establisher.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.Source, MessageBoxButtons.OK);
+            }
         }
 
         private async void listSearchResults_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -25,15 +31,14 @@ namespace DataBicycle
             bool listIsEmpty = listSearchResults.Items.Count < 0;
             bool listIndexIsNegative = selectedIndex < 0;
 
-            if (listIsEmpty || listIndexIsNegative)
-                return;
+            if (listIsEmpty || listIndexIsNegative) return;
 
             DetailsForm f2 = new DetailsForm();
             f2.Show();
 
             int currID = DataObtainer.IndexToID(selectedIndex);
 
-            if (!IsConnected(connection))
+            if (!TryToConnect(connection))
             {
                 f2.Close();
                 return;
@@ -125,7 +130,7 @@ namespace DataBicycle
                 return;
 
             // Проверяем, установлено ли соединение
-            if (!IsConnected(connection))
+            if (!TryToConnect(connection))
                 return;
 
             DataObtainer obtainer = new DataObtainer(connection);
@@ -137,15 +142,14 @@ namespace DataBicycle
         {
             listSearchResults.Items.Clear();
 
-            if (!IsConnected(connection))
-                return;
+            if (!TryToConnect(connection)) return;
 
             DataObtainer obtainer = new DataObtainer(connection);
             obtainer.FillList(listSearchResults);
         }
 
 
-        private bool IsConnected(SqlConnection connection)
+        private bool TryToConnect(SqlConnection connection)
         {
             if (connection == null)
             {
